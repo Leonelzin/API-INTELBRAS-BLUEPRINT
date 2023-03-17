@@ -1,0 +1,11 @@
+version: '2'
+services:
+    api:
+        build: .
+        volumes:
+        - .:/code
+
+        working_dir: /code
+        command: make run
+        ports:
+        - "9000:8080"

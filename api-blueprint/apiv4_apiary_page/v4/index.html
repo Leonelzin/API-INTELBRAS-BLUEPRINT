@@ -1,0 +1,96 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>API Intelbras V4</title>
+		<meta name="description" content="API Intelbras">
+		<meta name="author" content="Intelbras">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, height=device-height, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<style type="text/css">
+			 html, body {margin: 0px;padding: 0px;width: 100%;height: 100%;overflow: hidden;}
+			.logo { padding: 1em 0; text-align: center; background-color: #f2f2f2; width: 186px  }
+		</style>
+
+	</head>
+	<body>
+		<header class="myHeader">
+			<div class="logo center">
+				<img src="intelbras.svg">
+			</div>
+		</header>
+		<div id="divTeste"></div>
+		<script src="https://api.apiary.io/seeds/embed.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+		<script>
+			var embed = new Apiary.Embed({
+				header:".myHeader",
+				subdomain: "apiintelbrasv4",
+
+				preferences: {
+					collapseMachineColumnByDefault: true,
+					console: false,
+					newMachineColumn: true,
+					displayUriParametersInHumanColumn: false,
+					defaultHost: 'production',
+					permalinks: true
+				},
+				
+				theme: {
+					tableOfContents: {
+						backgroundColor: '#f2f2f2',
+
+						section: {
+							item: {
+								backgroundColor: '#f2f2f2',
+
+								$hover: {
+									backgroundColor: '#f2f2f2'
+								},
+
+								$selected: {
+									backgroundColor: '#f2f2f2'
+								}
+							}
+						}
+					},
+
+					humanColumn:{
+						content: {
+							section:{
+								resourceGroups: {
+									resourceGroup: {
+										name:{
+												borderBottom: '1px solid #33AF2D',
+												fontSize: '1.5em'
+										}
+												
+									},
+
+									resources: {
+										resource:{
+											name:{
+												fontSize: '1.5em'
+											}
+										}
+									}
+								},
+
+								apiDescription: {
+									p:{
+										textAlign: 'justify'
+									},
+
+									pre:{
+										color: '#3c4151'
+									}
+								}
+							}
+						}
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
+

@@ -1,0 +1,32 @@
+FROM ruby:2.3 as builder
+
+USER nobody
+WORKDIR /tmp
+
+COPY ./api.apib .
+
+RUN gem install listen -v 3.5.0 && \
+    gem install launchy -v 2.4.3 && \
+    gem install apiaryio && ls -lh && \
+    apiary preview --path="api.apib" --output=index.html
+
+
+FROM httpd:2.4-alpine3.14
+
+COPY ./apiv4_apiary_page/v4 /usr/local/apache2/htdocs/v4
+COPY --from=builder /tmp/index.html /usr/local/apache2/htdocs/v4-internal
+COPY httpd-protected-apiary.conf /usr/local/apache2/conf/extra/httpd-vhosts.conf
+
+RUN /sbin/apk add --no-cache tzdata && \
+	sed -i \
+	-e 's/^#\(LoadModule .*mod_authnz_ldap.so\)/\1/' \
+	-e 's/^#\(LoadModule .*mod_ldap.so\)/\1/' \
+	-e 's/^#\(Include .*httpd-vhosts.conf\)/\1/' \
+	-e 's/^\(Listen 80\)/\180/' \
+    conf/httpd.conf && \
+	chown -R www-data * && \
+    rm -f /usr/local/apache2/htdocs/index.html
+
+USER www-data
+
+EXPOSE 8080
